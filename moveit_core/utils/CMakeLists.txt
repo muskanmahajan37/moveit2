@@ -1,6 +1,6 @@
 set(MOVEIT_LIB_NAME moveit_utils)
 
-add_library(${MOVEIT_LIB_NAME} SHARED
+add_library(${MOVEIT_LIB_NAME}
   src/lexical_casts.cpp
   src/message_checks.cpp
   src/rclcpp_utils.cpp
@@ -20,19 +20,21 @@ if(BUILD_TESTING)
   find_package(ament_cmake_gtest REQUIRED)
   find_package(moveit_resources REQUIRED)
   set(MOVEIT_TEST_LIB_NAME moveit_test_utils)
-  add_library(${MOVEIT_TEST_LIB_NAME} SHARED
+  add_library(${MOVEIT_TEST_LIB_NAME}
     src/robot_model_test_utils.cpp)
   ament_target_dependencies(${MOVEIT_TEST_LIB_NAME}
     Boost
+    rclcpp
     urdf
     srdfdom
     urdfdom
     urdfdom_headers
     moveit_resources
+    ament_index_cpp
   )
 
   set_target_properties(${MOVEIT_TEST_LIB_NAME} PROPERTIES VERSION "${${PROJECT_NAME}_VERSION}")
-
+  
   ament_export_libraries(${MOVEIT_TEST_LIB_NAME} ${MOVEIT_LIB_NAME})
   ament_export_include_directories(include)
 

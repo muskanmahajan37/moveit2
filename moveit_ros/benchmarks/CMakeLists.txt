@@ -39,6 +39,7 @@ add_library(${MOVEIT_LIB_NAME}
   src/BenchmarkExecutor.cpp
 )
 set_target_properties(${MOVEIT_LIB_NAME} PROPERTIES VERSION "${${PROJECT_NAME}_VERSION}")
+set_target_properties(${MOVEIT_LIB_NAME} PROPERTIES WINDOWS_EXPORT_ALL_SYMBOLS TRUE)
 target_link_libraries(${MOVEIT_LIB_NAME} ${catkin_LIBRARIES} ${Boost_LIBRARIES})
 
 add_executable(moveit_run_benchmark src/RunBenchmark.cpp)

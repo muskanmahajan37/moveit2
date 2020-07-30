@@ -12,6 +12,11 @@ target_link_libraries(${MOVEIT_LIB_NAME}
   ${urdfdom_headers_LIBRARIES}
   ${Boost_LIBRARIES})
 
+# Causes the visibility macros to use dllexport rather than dllimport,
+# which is appropriate when building the dll but not consuming it.
+target_compile_definitions(${MOVEIT_LIB_NAME}
+  PRIVATE "ROBOT_TRAJECTORY_BUILDING_LIBRARY")
+
 install(TARGETS ${MOVEIT_LIB_NAME}
   ARCHIVE  DESTINATION lib
   LIBRARY DESTINATION lib

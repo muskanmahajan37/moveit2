@@ -2,6 +2,7 @@ set(MOVEIT_LIB_NAME moveit_trajectory_execution_manager)
 
 add_library(${MOVEIT_LIB_NAME} SHARED src/trajectory_execution_manager.cpp)
 set_target_properties(${MOVEIT_LIB_NAME} PROPERTIES VERSION "${${PROJECT_NAME}_VERSION}")
+set_target_properties(${MOVEIT_LIB_NAME} PROPERTIES WINDOWS_EXPORT_ALL_SYMBOLS TRUE)
 ament_target_dependencies(${MOVEIT_LIB_NAME}
   moveit_core
   moveit_ros_occupancy_map_monitor
@@ -28,6 +29,7 @@ install(DIRECTORY include/ DESTINATION include)
 
 add_library(test_controller_manager_plugin SHARED test/test_moveit_controller_manager_plugin.cpp)
 set_target_properties(test_controller_manager_plugin PROPERTIES VERSION "${${PROJECT_NAME}_VERSION}")
+set_target_properties(test_controller_manager_plugin PROPERTIES WINDOWS_EXPORT_ALL_SYMBOLS TRUE)
 ament_target_dependencies(test_controller_manager_plugin
   rclcpp
   Boost
