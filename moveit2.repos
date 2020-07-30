@@ -13,7 +13,7 @@ repositories:
     version: ros2
   random_numbers:
     type: git
-    url: https://github.com/lilustga/random_numbers
+    url: https://github.com/ms-iot/random_numbers
     version: ros2
   urdf_parser_py:
     type: git
@@ -25,28 +25,16 @@ repositories:
     version: ros2
   geometric_shapes:
     type: git
-    url: https://github.com/lilustga/geometric_shapes
+    url: https://github.com/ms-iot/geometric_shapes
     version: dashing-devel
   srdfdom:
     type: git
-    url: https://github.com/lilustga/srdfdom
+    url: https://github.com/ms-iot/srdfdom
     version: ros2
   octomap_msgs:
     type: git
     url: https://github.com/OctoMap/octomap_msgs
     version: ros2
-  urdfdom_headers:
-    type: git
-    url: https://github.com/ros/urdfdom_headers
-    version: eloquent
-  eigen_stl_containers:
-    type: git
-    url: https://github.com/ros/eigen_stl_containers
-    version: ros2
-  control_msgs:
-    type: git
-    url: https://github.com/ros-controls/control_msgs
-    version: foxy-devel
 
 # Dependencies with pending PRs
   object_recognition_msgs:
