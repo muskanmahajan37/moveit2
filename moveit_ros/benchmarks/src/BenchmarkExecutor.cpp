@@ -54,6 +54,7 @@
 #else
 #define NOMINMAX
 #include <winsock2.h>
+#pragma comment(lib, "Ws2_32.lib")
 #endif
 
 using namespace moveit_ros_benchmarks;
