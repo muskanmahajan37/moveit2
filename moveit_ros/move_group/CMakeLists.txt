@@ -26,9 +26,15 @@ add_library(moveit_move_group_capabilities_base SHARED src/move_group_context.cp
 set_target_properties(moveit_move_group_capabilities_base
   PROPERTIES
   VERSION "${${PROJECT_NAME}_VERSION}")
+set_target_properties(moveit_move_group_capabilities_base PROPERTIES WINDOWS_EXPORT_ALL_SYMBOLS TRUE)
 target_include_directories(moveit_move_group_capabilities_base PUBLIC include)
 ament_target_dependencies(moveit_move_group_capabilities_base
   rclcpp moveit_core moveit_ros_planning tf2_geometry_msgs)
+
+# Causes the visibility macros to use dllexport rather than dllimport,
+# which is appropriate when building the dll but not consuming it.
+target_compile_definitions(moveit_move_group_capabilities_base
+  PRIVATE "MOVE_GROUP_BUILDING_LIBRARY")
 
 add_executable(move_group src/move_group.cpp)
 target_include_directories(move_group PUBLIC include)
@@ -56,9 +62,11 @@ add_library(moveit_move_group_default_capabilities SHARED
 set_target_properties(moveit_move_group_default_capabilities
   PROPERTIES
   VERSION "${${PROJECT_NAME}_VERSION}")
+set_target_properties(moveit_move_group_default_capabilities PROPERTIES WINDOWS_EXPORT_ALL_SYMBOLS TRUE)
 target_include_directories(moveit_move_group_default_capabilities PUBLIC include)
 ament_target_dependencies(moveit_move_group_default_capabilities
   rclcpp rclcpp_action moveit_core moveit_ros_planning std_srvs)
+target_link_libraries(moveit_move_group_default_capabilities moveit_move_group_capabilities_base)
 
 install(TARGETS move_group list_move_group_capabilities
   RUNTIME

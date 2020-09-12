@@ -26,6 +26,7 @@ add_library(${PROJECT_NAME} SHARED
   src/follow_joint_trajectory_controller_handle.cpp
 )
 set_target_properties(${PROJECT_NAME} PROPERTIES VERSION "${${PROJECT_NAME}_VERSION}")
+set_target_properties(${PROJECT_NAME} PROPERTIES WINDOWS_EXPORT_ALL_SYMBOLS TRUE)
 ament_target_dependencies(${PROJECT_NAME}
   rclcpp
   control_msgs

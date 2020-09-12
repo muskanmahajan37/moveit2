@@ -87,6 +87,10 @@ bool MoveGroupCartesianPathService::computeService(
     const std::shared_ptr<moveit_msgs::srv::GetCartesianPath::Request> req,
     std::shared_ptr<moveit_msgs::srv::GetCartesianPath::Response> res)
 {
+  using boost::placeholders::_1;
+  using boost::placeholders::_2;
+  using boost::placeholders::_3;
+
   RCLCPP_INFO(LOGGER, "Received request to compute Cartesian path");
   context_->planning_scene_monitor_->updateFrameTransforms();
 

@@ -6,6 +6,7 @@ add_library(${MOVEIT_LIB_NAME} SHARED
   src/trajectory_monitor.cpp
 )
 set_target_properties(${MOVEIT_LIB_NAME} PROPERTIES VERSION "${${PROJECT_NAME}_VERSION}")
+set_target_properties(${MOVEIT_LIB_NAME} PROPERTIES WINDOWS_EXPORT_ALL_SYMBOLS TRUE)
 ament_target_dependencies(${MOVEIT_LIB_NAME}
   moveit_ros_occupancy_map_monitor
   message_filters
@@ -30,6 +31,11 @@ ament_target_dependencies(demo_scene
   pluginlib
 )
 target_link_libraries(demo_scene ${MOVEIT_LIB_NAME})
+
+# Causes the visibility macros to use dllexport rather than dllimport,
+# which is appropriate when building the dll but not consuming it.
+target_compile_definitions(${MOVEIT_LIB_NAME}
+  PRIVATE "PLANNING_SCENE_MONITOR_BUILDING_LIBRARY")
 
 install(TARGETS ${MOVEIT_LIB_NAME}
   ARCHIVE DESTINATION lib

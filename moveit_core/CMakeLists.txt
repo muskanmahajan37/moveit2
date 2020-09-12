@@ -12,7 +12,11 @@ if(NOT CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
   add_compile_options(-Wall -Wextra
     -Wwrite-strings -Wunreachable-code -Wpointer-arith -Wredundant-decls -Wcast-qual
     -Wno-unused-parameter -Wno-unused-function)
+else()
+  add_compile_options(/W3 /wd4251 /wd4068 /wd4275)
+  add_compile_options(/D_USE_MATH_DEFINES)
 endif()
+
 if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
   # This too often has false-positives
   add_compile_options(-Wno-maybe-uninitialized)
@@ -27,10 +31,6 @@ endif()
 
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
-# boost::iostreams on Windows depends on boost::zlib
-if(WIN32)
-  set(EXTRA_BOOST_COMPONENTS zlib)
-endif()
 find_package(Boost REQUIRED system filesystem date_time thread iostreams regex ${EXTRA_BOOST_COMPONENTS})
 
 find_package(eigen3_cmake_module REQUIRED)
@@ -59,6 +59,11 @@ pkg_check_modules(LIBFCL REQUIRED "fcl>=0.5.0")
 find_library(LIBFCL_LIBRARIES_FULL ${LIBFCL_LIBRARIES} ${LIBFCL_LIBRARY_DIRS})
 set(LIBFCL_LIBRARIES "${LIBFCL_LIBRARIES_FULL}")
 
+if(WIN32)
+pkg_check_modules(LIBCCD REQUIRED ccd)
+find_library(LIBCCD_LIBRARIES_FULL ${LIBCCD_LIBRARIES} ${LIBCCD_LIBRARY_DIRS})
+set(LIBCCD_LIBRARIES "${LIBCCD_LIBRARIES_FULL}")
+endif()
 
 find_package(OCTOMAP REQUIRED)
 find_package(urdfdom REQUIRED)
@@ -162,6 +167,7 @@ set(THIS_PACKAGE_INCLUDE_DEPENDS
   eigen3_cmake_module
   Boost
   OCTOMAP
+  pluginlib
   # ${BULLET_ENABLE}
 )
 pluginlib_export_plugin_description_file(moveit_core collision_detector_fcl_description.xml)

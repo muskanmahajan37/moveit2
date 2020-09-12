@@ -8,6 +8,7 @@ add_library(${MOVEIT_LIB_NAME}
   src/bullet_integration/bullet_bvh_manager.cpp
 )
 set_target_properties(${MOVEIT_LIB_NAME} PROPERTIES VERSION "${${PROJECT_NAME}_VERSION}")
+set_target_properties(${MOVEIT_LIB_NAME} PROPERTIES WINDOWS_EXPORT_ALL_SYMBOLS TRUE)
 
 target_link_libraries(${MOVEIT_LIB_NAME} moveit_collision_detection
     ${catkin_LIBRARIES} ${urdfdom_LIBRARIES}

@@ -619,7 +619,7 @@ TEST_F(KinematicsTest, randomWalkIK)
 //     }
 //
 //     kinematics_solver_->searchPositionIK(poses[0], fk_values, timeout_, solution,
-//                                          boost::bind(&KinematicsTest::searchIKCallback, this, _1, _2, _3),
+//                                          boost::bind(&KinematicsTest::searchIKCallback, this, boost::placeholders::_1, boost::placeholders::_2, boost::placeholders::_3),
 //                                          error_code);
 //     if (error_code.val == error_code.SUCCESS)
 //       success++;

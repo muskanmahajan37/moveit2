@@ -61,7 +61,7 @@ void MoveGroupExecuteService::initialize()
   ros::AdvertiseServiceOptions ops;
   ops.template init<moveit_msgs::srv::ExecuteKnownTrajectory::Request,
                     moveit_msgs::srv::ExecuteKnownTrajectory::Response>(
-      EXECUTE_SERVICE_NAME, boost::bind(&MoveGroupExecuteService::executeTrajectoryService, this, _1, _2));
+      EXECUTE_SERVICE_NAME, boost::bind(&MoveGroupExecuteService::executeTrajectoryService, this, boost::placeholders::_1, boost::placeholders::_2));
   ops.callback_queue = &callback_queue_;
   execute_service_ = root_node_handle_.advertiseService(ops);
   spinner_.start();

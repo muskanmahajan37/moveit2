@@ -175,7 +175,7 @@ void TrajectoryVisualization::onInitialize(const rclcpp::Node::SharedPtr& node, 
 
   trajectory_topic_sub_ = node_->create_subscription<moveit_msgs::msg::DisplayTrajectory>(
       trajectory_topic_property_->getStdString(), 2,
-      std::bind(&TrajectoryVisualization::incomingDisplayTrajectory, this, _1));
+      std::bind(&TrajectoryVisualization::incomingDisplayTrajectory, this, std::placeholders::_1));
 }
 
 void TrajectoryVisualization::setName(const QString& name)
@@ -284,7 +284,7 @@ void TrajectoryVisualization::changedTrajectoryTopic()
   {
     trajectory_topic_sub_ = node_->create_subscription<moveit_msgs::msg::DisplayTrajectory>(
         trajectory_topic_property_->getStdString(), 2,
-        std::bind(&TrajectoryVisualization::incomingDisplayTrajectory, this, _1));
+        std::bind(&TrajectoryVisualization::incomingDisplayTrajectory, this, std::placeholders::_1));
   }
 }
 

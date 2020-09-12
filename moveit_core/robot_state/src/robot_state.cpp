@@ -1729,7 +1729,7 @@ bool RobotState::setFromIK(const JointModelGroup* jmg, const EigenSTL::vector_Is
   // set callback function
   kinematics::KinematicsBase::IKCallbackFn ik_callback_fn;
   if (constraint)
-    ik_callback_fn = boost::bind(&ikCallbackFnAdapter, this, jmg, constraint, _1, _2, _3);
+    ik_callback_fn = boost::bind(&ikCallbackFnAdapter, this, jmg, constraint, boost::placeholders::_1, boost::placeholders::_2, boost::placeholders::_3);
 
   // Bijection
   const std::vector<unsigned int>& bij = jmg->getKinematicsSolverJointBijection();
@@ -1878,7 +1878,7 @@ bool RobotState::setFromIKSubgroups(const JointModelGroup* jmg, const EigenSTL::
   std::vector<geometry_msgs::msg::Pose> ik_queries(poses_in.size());
   kinematics::KinematicsBase::IKCallbackFn ik_callback_fn;
   if (constraint)
-    ik_callback_fn = boost::bind(&ikCallbackFnAdapter, this, jmg, constraint, _1, _2, _3);
+    ik_callback_fn = boost::bind(&ikCallbackFnAdapter, this, jmg, constraint, boost::placeholders::_1, boost::placeholders::_2, boost::placeholders::_3);
 
   for (std::size_t i = 0; i < transformed_poses.size(); ++i)
   {

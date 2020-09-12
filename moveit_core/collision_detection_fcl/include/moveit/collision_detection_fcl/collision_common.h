@@ -41,6 +41,7 @@
 #include <moveit/macros/class_forward.h>
 #include <moveit/collision_detection_fcl/fcl_compat.h>
 #include <geometric_shapes/check_isometry.h>
+#include <moveit/collision_detection_fcl/visibility_control.hpp>
 
 #if (MOVEIT_FCL_VERSION >= FCL_VERSION_CHECK(0, 6, 0))
 #include <fcl/broadphase/broadphase_collision_manager.h>
@@ -275,6 +276,7 @@ struct FCLManager
 *   \param o2 Second FCL collision object
 *   \data General pointer to arbitrary data which is used during the callback
 *   \return True terminates the distance check, false continues it to the next pair of objects */
+
 bool collisionCallback(fcl::CollisionObjectd* o1, fcl::CollisionObjectd* o2, void* data);
 
 /** \brief Callback function used by the FCLManager used for each pair of collision objects to

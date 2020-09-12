@@ -1,11 +1,23 @@
 repositories:
   moveit2:
     type: git
-    url: https://github.com/ros-planning/moveit2
-    version: main
+    url: https://github.com/ms-iot/moveit2
+    version: windows/main/d95e4aecf4ac7a0f8b43fe91742b86251b8762ca
   moveit_msgs:
     type: git
     url: https://github.com/ros-planning/moveit_msgs
+    version: ros2
+  joint_state_publisher:
+    type: git
+    url: https://github.com/ros/joint_state_publisher
+    version: ros2
+  random_numbers:
+    type: git
+    url: https://github.com/ms-iot/random_numbers
+    version: ros2
+  urdf_parser_py:
+    type: git
+    url: https://github.com/ros/urdf_parser_py
     version: ros2
   moveit_resources:
     type: git
@@ -13,11 +25,11 @@ repositories:
     version: ros2
   geometric_shapes:
     type: git
-    url: https://github.com/ros-planning/geometric_shapes
-    version: ros2
+    url: https://github.com/ms-iot/geometric_shapes
+    version: dashing-devel
   srdfdom:
     type: git
-    url: https://github.com/PickNikRobotics/srdfdom
+    url: https://github.com/ms-iot/srdfdom
     version: ros2
 
 # TODO(#242): Remove below once console_bridge conflict is resolved
@@ -29,7 +41,18 @@ repositories:
     type: git
     url: https://github.com/ros/urdfdom_headers
     version: foxy
-
+  octomap_msgs:
+    type: git
+    url: https://github.com/OctoMap/octomap_msgs
+    version: ros2
+  eigen_stl_containers:
+    type: git
+    url: https://github.com/ros/eigen_stl_containers
+    version: ros2
+  control_msgs:
+    type: git
+    url: https://github.com/ros-controls/control_msgs
+    version: foxy-devel
   ros2_control:
     type: git
     url: https://github.com/ros-controls/ros2_control

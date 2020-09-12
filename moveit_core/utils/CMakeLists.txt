@@ -1,6 +1,6 @@
 set(MOVEIT_LIB_NAME moveit_utils)
 
-add_library(${MOVEIT_LIB_NAME} SHARED
+add_library(${MOVEIT_LIB_NAME}
   src/lexical_casts.cpp
   src/message_checks.cpp
   src/rclcpp_utils.cpp
@@ -25,14 +25,17 @@ if(BUILD_TESTING)
   ament_target_dependencies(${MOVEIT_TEST_LIB_NAME}
     Boost
     geometry_msgs
+    rclcpp
     urdf
     srdfdom
     urdfdom
     urdfdom_headers
+    moveit_resources
+    ament_index_cpp
   )
 
   set_target_properties(${MOVEIT_TEST_LIB_NAME} PROPERTIES VERSION "${${PROJECT_NAME}_VERSION}")
-
+  
   ament_export_libraries(${MOVEIT_TEST_LIB_NAME} ${MOVEIT_LIB_NAME})
   ament_export_include_directories(include)
 

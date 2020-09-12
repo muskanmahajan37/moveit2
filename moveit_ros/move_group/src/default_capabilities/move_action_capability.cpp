@@ -71,7 +71,7 @@ void MoveGroupMoveAction::initialize()
         RCLCPP_INFO(LOGGER, "Received request to cancel goal");
         return rclcpp_action::CancelResponse::ACCEPT;
       },
-      std::bind(&MoveGroupMoveAction::executeMoveCallback, this, _1));
+      std::bind(&MoveGroupMoveAction::executeMoveCallback, this, std::placeholders::_1));
 }
 
 void MoveGroupMoveAction::executeMoveCallback(std::shared_ptr<MGActionGoal> goal)
@@ -148,11 +148,11 @@ void MoveGroupMoveAction::executeMoveCallbackPlanAndExecute(const std::shared_pt
   opt.before_execution_callback_ = boost::bind(&MoveGroupMoveAction::startMoveExecutionCallback, this);
 
   opt.plan_callback_ =
-      boost::bind(&MoveGroupMoveAction::planUsingPlanningPipeline, this, boost::cref(motion_plan_request), _1);
+      boost::bind(&MoveGroupMoveAction::planUsingPlanningPipeline, this, boost::cref(motion_plan_request), boost::placeholders::_1);
   if (goal->get_goal()->planning_options.look_around && context_->plan_with_sensing_)
   {
     opt.plan_callback_ = boost::bind(&plan_execution::PlanWithSensing::computePlan, context_->plan_with_sensing_.get(),
-                                     _1, opt.plan_callback_, goal->get_goal()->planning_options.look_around_attempts,
+                                     boost::placeholders::_1, opt.plan_callback_, goal->get_goal()->planning_options.look_around_attempts,
                                      goal->get_goal()->planning_options.max_safe_execution_cost);
     context_->plan_with_sensing_->setBeforeLookCallback(boost::bind(&MoveGroupMoveAction::startMoveLookCallback, this));
   }

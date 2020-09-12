@@ -9,6 +9,11 @@ qt5_wrap_ui(UIC_FILES
   src/ui/motion_planning_rviz_plugin_frame_joints.ui
 )
 
+if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
+  add_compile_options(/W3 /wd4251 /wd4068 /wd4275)
+  add_compile_options(/D_USE_MATH_DEFINES)
+endif()
+
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
 # Plugin Source
@@ -29,6 +34,7 @@ set(SOURCE_FILES
 set(MOVEIT_LIB_NAME moveit_motion_planning_rviz_plugin)
 add_library(${MOVEIT_LIB_NAME}_core SHARED ${SOURCE_FILES} ${HEADERS} ${UIC_FILES})
 set_target_properties(${MOVEIT_LIB_NAME}_core PROPERTIES VERSION "${${PROJECT_NAME}_VERSION}")
+set_target_properties(${MOVEIT_LIB_NAME}_core PROPERTIES WINDOWS_EXPORT_ALL_SYMBOLS TRUE)
 target_link_libraries(${MOVEIT_LIB_NAME}_core moveit_rviz_plugin_render_tools moveit_planning_scene_rviz_plugin)
 ament_target_dependencies(${MOVEIT_LIB_NAME}_core
   Boost
@@ -42,6 +48,7 @@ ament_target_dependencies(${MOVEIT_LIB_NAME}_core
 
 add_library(${MOVEIT_LIB_NAME} SHARED src/plugin_init.cpp)
 set_target_properties(${MOVEIT_LIB_NAME} PROPERTIES VERSION "${${PROJECT_NAME}_VERSION}")
+set_target_properties(${MOVEIT_LIB_NAME} PROPERTIES WINDOWS_EXPORT_ALL_SYMBOLS TRUE)
 target_link_libraries(${MOVEIT_LIB_NAME} ${MOVEIT_LIB_NAME}_core)
 ament_target_dependencies(${MOVEIT_LIB_NAME}
   Boost

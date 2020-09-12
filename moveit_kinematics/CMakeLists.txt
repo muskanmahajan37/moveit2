@@ -7,13 +7,17 @@ endif()
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
+if (WIN32)
+  add_compile_options(/wd4251 /wd4068 /wd4275)
+endif()
+
 if(NOT CMAKE_CONFIGURATION_TYPES AND NOT CMAKE_BUILD_TYPE)
   set(CMAKE_BUILD_TYPE Release)
 endif()
 
 find_package(ament_cmake REQUIRED)
 
-find_package(Boost REQUIRED program_options system)
+find_package(Boost REQUIRED program_options system filesystem regex)
 find_package(Eigen3 REQUIRED)
 find_package(orocos_kdl REQUIRED)
 find_package(tf2_kdl REQUIRED)

@@ -162,7 +162,7 @@ bool KinematicsConstraintAware::getIK(const planning_scene::PlanningSceneConstPt
       transformPoses(planning_scene, kinematic_state, request.pose_stamped_vector_, kinematic_model_->getModelFrame());
 
   moveit::core::StateValidityCallbackFn constraint_callback_fn =
-      boost::bind(&KinematicsConstraintAware::validityCallbackFn, this, planning_scene, request, response, _1, _2);
+      boost::bind(&KinematicsConstraintAware::validityCallbackFn, this, planning_scene, request, response, boost::placeholders::_1, boost::placeholders::_2);
 
   bool result = false;
   if (has_sub_groups_)

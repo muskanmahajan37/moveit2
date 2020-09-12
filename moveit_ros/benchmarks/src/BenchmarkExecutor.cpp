@@ -52,6 +52,7 @@
 #ifndef _WIN32
 #include <unistd.h>
 #else
+#define NOMINMAX
 #include <winsock2.h>
 #endif
 

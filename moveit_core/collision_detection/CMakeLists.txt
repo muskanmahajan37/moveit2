@@ -11,6 +11,8 @@ add_library(${MOVEIT_LIB_NAME} SHARED
 )
 
 set_target_properties(${MOVEIT_LIB_NAME} PROPERTIES VERSION ${${PROJECT_NAME}_VERSION})
+set_target_properties(${MOVEIT_LIB_NAME} PROPERTIES WINDOWS_EXPORT_ALL_SYMBOLS TRUE)
+
 ament_target_dependencies(${MOVEIT_LIB_NAME}
   rclcpp
   rmw_implementation
@@ -48,6 +50,12 @@ if(BUILD_TESTING)
     APPEND_LIBRARY_DIRS "${append_library_dirs}")
   target_link_libraries(test_all_valid ${MOVEIT_LIB_NAME} moveit_robot_model)
 endif()
+
+# Causes the visibility macros to use dllexport rather than dllimport,
+# which is appropriate when building the dll but not consuming it.
+target_compile_definitions(${MOVEIT_LIB_NAME}
+  PRIVATE "COLLISION_DETECTION_BUILDING_LIBRARY")
+
 
 install(TARGETS ${MOVEIT_LIB_NAME}
   LIBRARY DESTINATION lib

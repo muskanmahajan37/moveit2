@@ -60,6 +60,8 @@
 #include <utility>
 #include <tf2_ros/buffer.h>
 
+#include <moveit/move_group_interface/visibility_control.hpp>
+
 namespace moveit
 {
 /** \brief Simple interface to MoveIt components */
@@ -105,7 +107,7 @@ class MoveGroupInterface
 {
 public:
   /** \brief Default ROS parameter name from where to read the robot's URDF. Set to 'robot_description' */
-  static const std::string ROBOT_DESCRIPTION;
+  MOVE_GROUP_INTERFACE_PUBLIC static const std::string ROBOT_DESCRIPTION;
 
   /** \brief Specification of options to use when constructing the MoveGroupInterface class */
   struct Options

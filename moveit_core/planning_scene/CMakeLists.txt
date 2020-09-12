@@ -12,6 +12,7 @@ ament_target_dependencies(${MOVEIT_LIB_NAME}
   OCTOMAP
 )
 
+set_target_properties(${MOVEIT_LIB_NAME} PROPERTIES WINDOWS_EXPORT_ALL_SYMBOLS TRUE)
 target_link_libraries(${MOVEIT_LIB_NAME}
   moveit_robot_model
   moveit_robot_state
@@ -24,6 +25,11 @@ target_link_libraries(${MOVEIT_LIB_NAME}
   moveit_trajectory_processing
   moveit_utils
 )
+
+# Causes the visibility macros to use dllexport rather than dllimport,
+# which is appropriate when building the dll but not consuming it.
+target_compile_definitions(${MOVEIT_LIB_NAME}
+  PRIVATE "PLANNING_SCENE_BUILDING_LIBRARY")
 
 install(TARGETS ${MOVEIT_LIB_NAME}
         LIBRARY DESTINATION lib

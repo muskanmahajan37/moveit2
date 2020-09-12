@@ -40,6 +40,7 @@
 #include <rviz_default_plugins/robot/robot.hpp>
 #include <rviz_common/properties/string_property.hpp>
 #include <rviz_common/properties/ros_topic_property.hpp>
+#include <moveit/planning_scene_rviz_plugin/visibility_control.hpp>
 #ifndef Q_MOC_RUN
 #include <moveit/rviz_plugin_render_tools/planning_scene_render.h>
 #include <moveit/planning_scene_monitor/planning_scene_monitor.h>
@@ -66,7 +67,7 @@ class EnumProperty;
 
 namespace moveit_rviz_plugin
 {
-class PlanningSceneDisplay : public rviz_common::Display
+class PLANNING_SCENE_RVIZ_PLUGIN_PUBLIC PlanningSceneDisplay : public rviz_common::Display
 {
   Q_OBJECT
 
