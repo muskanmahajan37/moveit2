@@ -5,7 +5,6 @@ add_library(${MOVEIT_LIB_NAME} SHARED
   src/collision_env_fcl.cpp
 )
 set_target_properties(${MOVEIT_LIB_NAME} PROPERTIES VERSION "${${PROJECT_NAME}_VERSION}")
-set_target_properties(${MOVEIT_LIB_NAME} PROPERTIES WINDOWS_EXPORT_ALL_SYMBOLS TRUE)
 ament_target_dependencies(${MOVEIT_LIB_NAME}
   rclcpp
   rmw_implementation
@@ -29,7 +28,6 @@ target_compile_definitions(${MOVEIT_LIB_NAME}
 
 add_library(collision_detector_fcl_plugin SHARED src/collision_detector_fcl_plugin_loader.cpp)
 set_target_properties(collision_detector_fcl_plugin PROPERTIES VERSION "${${PROJECT_NAME}_VERSION}")
-set_target_properties(collision_detector_fcl_plugin PROPERTIES WINDOWS_EXPORT_ALL_SYMBOLS TRUE)
 ament_target_dependencies(collision_detector_fcl_plugin
   rclcpp
   urdf
