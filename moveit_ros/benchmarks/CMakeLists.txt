@@ -3,21 +3,12 @@ project(moveit_ros_benchmarks)
 
 set(MOVEIT_LIB_NAME moveit_ros_benchmarks)
 
-if(NOT "${CMAKE_CXX_STANDARD}")
-  set(CMAKE_CXX_STANDARD 14)
-endif()
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_CXX_EXTENSIONS OFF)
-
-if(NOT CMAKE_CONFIGURATION_TYPES AND NOT CMAKE_BUILD_TYPE)
-  set(CMAKE_BUILD_TYPE Release)
-endif()
-
 if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
-  add_compile_options(-Wall -Wextra -Wpedantic)
+  add_compile_options(-Wpedantic)
 endif()
 
 find_package(ament_cmake REQUIRED)
+find_package(moveit_common REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(Boost REQUIRED date_time filesystem)
 find_package(tf2_eigen REQUIRED)
@@ -26,6 +17,8 @@ find_package(moveit_ros_planning REQUIRED)
 # find_package(moveit_ros_warehouse REQUIRED)
 find_package(pluginlib REQUIRED)
 
+moveit_package()
+
 include_directories(include)
 
 add_library(${MOVEIT_LIB_NAME} SHARED
@@ -33,7 +26,6 @@ add_library(${MOVEIT_LIB_NAME} SHARED
   src/BenchmarkExecutor.cpp
 )
 set_target_properties(${MOVEIT_LIB_NAME} PROPERTIES VERSION "${${PROJECT_NAME}_VERSION}")
-set_target_properties(${MOVEIT_LIB_NAME} PROPERTIES WINDOWS_EXPORT_ALL_SYMBOLS TRUE)
 ament_target_dependencies(${MOVEIT_LIB_NAME}
   rclcpp
   Boost
