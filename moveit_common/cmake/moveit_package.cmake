@@ -13,6 +13,16 @@ macro(moveit_package)
   else()
     add_compile_options(/W3 /wd4251 /wd4068 /wd4275)
     add_compile_options(/D_USE_MATH_DEFINES)
+
+    # https://blog.kitware.com/create-dlls-on-windows-without-declspec-using-new-cmake-export-all-feature/
+    set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
+
+    # Enable Math Constants
+    # https://docs.microsoft.com/en-us/cpp/c-runtime-library/math-constants?view=vs-2019
+    add_compile_definitions(
+      _USE_MATH_DEFINES
+    )
+
   endif()
 
   if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
@@ -25,17 +35,5 @@ macro(moveit_package)
   if(NOT CMAKE_CONFIGURATION_TYPES AND NOT CMAKE_BUILD_TYPE)
     message("${PROJECT_NAME}: You did not request a specific build type: Choosing 'Release' for maximum performance")
     set(CMAKE_BUILD_TYPE Release)
-  endif()
-
-  # Defaults for Microsoft C++ compiler
-  if(MSVC)
-    # https://blog.kitware.com/create-dlls-on-windows-without-declspec-using-new-cmake-export-all-feature/
-    set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
-
-    # Enable Math Constants
-    # https://docs.microsoft.com/en-us/cpp/c-runtime-library/math-constants?view=vs-2019
-    add_compile_definitions(
-      _USE_MATH_DEFINES
-    )
   endif()
 endmacro()
